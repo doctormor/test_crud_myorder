@@ -1,0 +1,81 @@
+<div class="container">
+  <app-nav-bar></app-nav-bar>
+  <div class="row my-2">
+    <div class="col ">
+      <form action="" name="search_form" method="post">
+        <div class="input-group mb-3">
+          <input type="text" name="name" class="form-control" placeholder="ค้นหาชื่อพนักงาน" [(ngModel)]="search_name">
+          <input type="hidden" name="btnsearch" id="btnsearch" value="search" />
+          <button class="btn btn-dark" type="submit" (click)="searchEmployees()">Button</button>
+        </div>
+      </form>
+    </div>
+    <div class="col text-end">
+      <button
+        type="button"
+        [routerLink]="['/employee-add']"
+        class="btn btn-primary"
+      >
+        Add
+      </button>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col">
+      <table class="table table-striped">
+        <thead>
+          <tr>
+            <th scope="col">#</th>
+            <th scope="col">รหัสบัตรประชาชน</th>
+            <th scope="col">ชื่อ-นามสกุล</th>
+            <th scope="col">เบอร์โทร</th>
+            <th scope="col">อีเมล์</th>
+            <th scope="col">เพศ</th>
+            <th scope="col">สถานะ</th>
+            <th scope="col">แก้ไข</th>
+            <th scope="col">ลบ</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr
+            *ngFor="let employee of employees; let i = index"
+            [class.active]="i == currentIndex"
+          >
+            <th scope="row">{{ i+1 }}</th>
+            <td>{{ employee.perId }}</td>
+            <td>{{ employee.name }} {{ employee.surname }}</td>
+            <td>{{ employee.mobile }}</td>
+            <td>{{ employee.email }}</td>
+            <td>{{ employee.sex }}</td>
+            <td>
+              <ng-template [ngIf]="employee.isActive === true">
+                <h5><span class="badge bg-success">ใช้งาน</span></h5>
+              </ng-template>
+              <ng-template [ngIf]="employee.isActive === false">
+                <h5><span class="badge bg-danger">ไม่ใช้งาน</span></h5>
+              </ng-template>
+            </td>
+            <td>
+              <button
+                type="button"
+                class="btn btn-outline-warning"
+                [routerLink]="['/employee-edit/' + employee.id]"
+              >
+                <fa-icon [icon]="faPen"></fa-icon>
+              </button>
+            </td>
+            <td>
+              <button
+                type="button"
+                class="btn btn-outline-danger btn-icon"
+                (click)="deleteEmployee(employee.id)"
+              >
+                <fa-icon [icon]="faTrash"></fa-icon>
+              </button>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>

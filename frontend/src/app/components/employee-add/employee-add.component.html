@@ -1,0 +1,141 @@
+<div class="container">
+  <app-nav-bar></app-nav-bar>
+  <div class="row my-2">
+    <div class="col">
+        <h3>เพิ่มข้อมูลพนักาน</h3>
+      </div>
+    <div class="col text-end">
+      <button
+        type="button"
+        (click)="backPreviousPage()"
+        class="btn btn-warning"
+      >
+        <i class="icon-undo"></i> Back
+      </button>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col">
+      <form (ngSubmit)="saveEmployee()" #myForm="ngForm">
+        <div class="row mb-3">
+          <label for="inputEmail3" class="col-sm-2 col-form-label"
+            >หมายเลขบัตรประชาชน</label
+          >
+          <div class="col-sm-10">
+            <input
+              type="text"
+              name="perId"
+              class="form-control"
+              placeholder="หมายเลขบัตรประชาชน"
+              [(ngModel)]="employee.perId"
+              ngModel maxlength="13"
+              required
+            />
+          </div>
+        </div>
+        <div class="row mb-3">
+          <label for="inputEmail3" class="col-sm-2 col-form-label"
+            >ชื่อ-นามสกุล</label
+          >
+          <div class="col">
+            <input
+              type="text"
+              name="firstname"
+              class="form-control"
+              placeholder="First name"
+              [(ngModel)]="employee.name"
+              required
+            />
+          </div>
+          <div class="col">
+            <input
+              type="text"
+              name="surname"
+              class="form-control"
+              placeholder="Last name"
+              [(ngModel)]="employee.surname"
+              required
+            />
+          </div>
+        </div>
+        <div class="row mb-3">
+          <label for="inputEmail3" class="col-sm-2 col-form-label"
+            >ที่อยู่</label
+          >
+          <div class="col-sm-10">
+            <textarea
+              name="address"
+              class="form-control"
+              rows="3"
+              [(ngModel)]="employee.address"
+            ></textarea>
+          </div>
+        </div>
+        <div class="row mb-3">
+          <label for="inputEmail3" class="col-sm-2 col-form-label"
+            >เบอร์โทรศัพท์</label
+          >
+          <div class="col-sm-10">
+            <input
+              name="mobile"
+              type="text"
+              class="form-control"
+              placeholder="เบอร์โทรศัพท์"
+              [(ngModel)]="employee.mobile"
+              required
+            />
+          </div>
+        </div>
+        <div class="row mb-3">
+          <label for="inputEmail3" class="col-sm-2 col-form-label"
+            >อีเมล์</label
+          >
+          <div class="col-sm-10">
+            <input
+              name="email"
+              type="email"
+              class="form-control"
+              placeholder="อีเมล์"
+              [(ngModel)]="employee.email"
+            />
+          </div>
+        </div>
+        <fieldset class="row mb-3">
+          <legend class="col-form-label col-sm-2 pt-0">เพศ</legend>
+          <div class="col-sm-10">
+            <div class="form-check">
+              <input
+                class="form-check-input"
+                type="radio"
+                name="sex"
+                id="sex1"
+                value="male"
+                [(ngModel)]="employee.sex"
+                checked
+              />
+              <label class="form-check-label" for="gridRadios1"> ชาย </label>
+            </div>
+            <div class="form-check">
+              <input
+                class="form-check-input"
+                type="radio"
+                name="sex"
+                id="sex2"
+                value="female"
+                [(ngModel)]="employee.sex"
+              />
+              <label class="form-check-label" for="gridRadios2"> หญิง </label>
+            </div>
+          </div>
+        </fieldset>
+        <button
+          type="submit"
+          class="btn btn-primary float-end"
+          [disabled]="!myForm.form.valid"
+        >
+          Save
+        </button>
+      </form>
+    </div>
+  </div>
+</div>
